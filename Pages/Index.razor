@@ -1,0 +1,36 @@
+﻿@page "/"
+
+@using TestDapperBlazor.Models;    
+@using TestDapperBlazor.Data;
+
+<table class="table table-bordered">
+    <tr>
+        <th>Emp ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone</th>
+    </tr>
+    @foreach (var emp in emps)
+    {
+        <tr>
+            <td>@emp.emp_id</td>
+            <td>@emp.first_name</td>
+            <td>@emp.last_name</td>
+            <td>@emp.phone</td>
+        </tr>
+    }
+</table>
+
+@code {
+
+    protected List<Employees> emps;
+
+    protected override async Task OnInitializedAsync()
+    {
+        emps = Database.GetEmployeesUsingDapper();
+        // Database.InsertEmployees();
+        // Database.DeleteEmployees();
+        // Database.UpdateEmployees();
+        Database.InsertEmployees();
+    }
+}
